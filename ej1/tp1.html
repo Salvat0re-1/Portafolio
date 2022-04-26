@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Ejercicio 1</h1>
+    <label for="ej1_c1">Numero 1</label>
+    <input type="number" id="ej1_c1">
+
+    <label for="ej1_c2">Numero 2</label>
+    <input type="number" id="ej1_c2">
+
+    <label for="ej1_c3">Numero 3</label>
+    <input type="number" id="ej1_c3">
+
+    <button onclick="func_ej1()">Comparar</button>
+
+    <label for="ej1_resultado">Resultado</label>
+    <input type="text" id="ej1_resultado">
+
+   
+
+    <script>
+       function func_ej1(){
+        let ej1_c1 = parseFloat(document.getElementById("ej1_c1").value);
+        let ej1_c2 = parseFloat(document.getElementById("ej1_c2").value);
+        let ej1_c3 = parseFloat(document.getElementById("ej1_c3").value);
+
+        if ((ej1_c1 > ej1_c2)&&(ej1_c1>ej1_c3)){
+            document.getElementById("ej1_resultado").value = "El mayor de todos es el n° 1";
+        }
+        if ((ej1_c2 > ej1_c3)&&(ej1_c2>ej1_c3)){
+            document.getElementById("ej1_resultado").value = "El mayor de todos es el n° 2";
+        }
+        if ((ej1_c3 > ej1_c1)&&(ej1_c3>ej1_c2)){
+            document.getElementById("ej1_resultado").value = "El mayor de todos es el n° 3";
+        }
+    }
+    </script>
+
+<h1>Ejercicio 2</h1>
+<label for="ej2_c1">Numero 1</label>
+<input type="number" id="ej2_c1">
+
+<label for="ej2_c2">Numero 2</label>
+<input type="number" id="ej2_c">
+
+<button onclick="func_ej2()">Comparar</button>
+
+<label for="ej2_resultado">Resultado</label>
+<input type="text" id="ej2_resultado">
+
+    <script>
+        function func_ej2(){
+        let ej2_c1 = parseFloat(document.getElementById("ej2_c1").value);
+        let ej2_c2 = parseFloat(document.getElementById("ej2_c2").value);
+        
+        let ej2_suma = ej2_c1 + ej2_c2
+        document.getElementById("ej2_resultado").value= ej2_suma;
+        }
+    </script>
+
+<h1>Ejercicio 3</h1>
+<label for="ej3_c1">Palabra</label>
+<input type="text" id="ej3_c1">
+
+<label for="ej3_c2">Numero</label>
+<input type="number" id="ej3_c2">
+
+<button onclick="func_ej3()">Resultado</button>
+
+<label for="ej3_resultado">Resultado</label>
+<input type="text" id="ej3_resultado">
+
+    <script>
+        function func_ej3(){
+            let ej3_c1 = document.getElementById("ej3_c1").value;
+            let ej3_c2 = parseFloat(document.getElementById("ej3_c2").value);
+            let ej3_resultado = ""
+
+            for (let index = 0; index <ej3_c2; index++) {
+                ej3_resultado = ej3_resultado + ej3_c1 + "_"
+                //ej3_resultado += ej3_c1
+            }
+            document.getElementById("ej3_resultado").value = ej3_resultado
+
+        }
+    </script>
+
+
+
+
+</body>
+</html>

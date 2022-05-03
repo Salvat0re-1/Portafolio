@@ -5,8 +5,11 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <script src="../js/funcionalidades.js"></script>
 </head>
+
 <body>
+    <!-- ej -->
     <h1>Ejercicio 1</h1>
     <label for="ej1_c1">Numero 1</label>
     <input type="number" id="ej1_c1">
@@ -22,77 +25,123 @@
     <label for="ej1_resultado">Resultado</label>
     <input type="text" id="ej1_resultado">
 
-   
+    <!-- ej -->
+    <h1>Ejercicio 2</h1>
+    
+    <label for="ej2_c1">Numero 1</label>
+    <input type="number" id="ej2_c1">
 
-    <script>
-       function func_ej1(){
-        let ej1_c1 = parseFloat(document.getElementById("ej1_c1").value);
-        let ej1_c2 = parseFloat(document.getElementById("ej1_c2").value);
-        let ej1_c3 = parseFloat(document.getElementById("ej1_c3").value);
+    <label for="ej2_c2">Numero 2</label>
+    <input type="number" id="ej2_c">
+    
+    <button onclick="func_ej2()">Comparar</button>
 
-        if ((ej1_c1 > ej1_c2)&&(ej1_c1>ej1_c3)){
-            document.getElementById("ej1_resultado").value = "El mayor de todos es el n° 1";
-        }
-        if ((ej1_c2 > ej1_c3)&&(ej1_c2>ej1_c3)){
-            document.getElementById("ej1_resultado").value = "El mayor de todos es el n° 2";
-        }
-        if ((ej1_c3 > ej1_c1)&&(ej1_c3>ej1_c2)){
-            document.getElementById("ej1_resultado").value = "El mayor de todos es el n° 3";
-        }
-    }
-    </script>
+    <label for="ej2_resultado">Resultado</label>
+    <input type="text" id="ej2_resultado">
 
-<h1>Ejercicio 2</h1>
-<label for="ej2_c1">Numero 1</label>
-<input type="number" id="ej2_c1">
+    <!-- ej -->
+    <h1>Ejercicio 3</h1>
+    <label for="ej3_c1">Palabra</label>
+    <input type="text" id="ej3_c1">
+    
+    <label for="ej3_c2">Numero</label>
+    <input type="number" id="ej3_c2">
+    
+    <button onclick="func_ej3()">Resultado</button>
+    
+    <label for="ej3_resultado">Resultado</label>
+    <input type="text" id="ej3_resultado">    
 
-<label for="ej2_c2">Numero 2</label>
-<input type="number" id="ej2_c">
-
-<button onclick="func_ej2()">Comparar</button>
-
-<label for="ej2_resultado">Resultado</label>
-<input type="text" id="ej2_resultado">
-
-    <script>
-        function func_ej2(){
-        let ej2_c1 = parseFloat(document.getElementById("ej2_c1").value);
-        let ej2_c2 = parseFloat(document.getElementById("ej2_c2").value);
-        
-        let ej2_suma = ej2_c1 + ej2_c2
-        document.getElementById("ej2_resultado").value= ej2_suma;
-        }
-    </script>
-
-<h1>Ejercicio 3</h1>
-<label for="ej3_c1">Palabra</label>
-<input type="text" id="ej3_c1">
-
-<label for="ej3_c2">Numero</label>
-<input type="number" id="ej3_c2">
-
-<button onclick="func_ej3()">Resultado</button>
-
-<label for="ej3_resultado">Resultado</label>
-<input type="text" id="ej3_resultado">
-
-    <script>
-        function func_ej3(){
-            let ej3_c1 = document.getElementById("ej3_c1").value;
-            let ej3_c2 = parseFloat(document.getElementById("ej3_c2").value);
-            let ej3_resultado = ""
-
-            for (let index = 0; index <ej3_c2; index++) {
-                ej3_resultado = ej3_resultado + ej3_c1 + "_"
-                //ej3_resultado += ej3_c1
-            }
-            document.getElementById("ej3_resultado").value = ej3_resultado
-
-        }
-    </script>
+    <!-- ej -->
+    <h1>Ejercicio 4</h1>
+    <label for="ej4_c1">Grados Celcius</label>
+    <input type="number" id="ej4_c1">
+    
+    <label for="ej4_c2">Grados Fahrenheit</label>
+    <input type="number" id="ej4_c2">
+    <button onclick="func_ej4()">Convertir</button>
 
 
+    <!-- ej -->
+    <h1>Ejercicio 5</h1>
+    <label for="ej5_c1">Palabra</label>
+    <input type="text" id="ej5_c1">
+    
+    <button onclick="func_ej5()">Resultado</button>
+    
+    <input type="text" id="ej5_c3">
+    <label for="ej5_resultado">tiene</label>
+    <input type="text" id="ej5_resultado">
+    <label for="ej5_resultado">letras</label>
 
+
+    <!-- ej -->
+    <h1>Ejercicio 6</h1>
+    <label for="ej6_c1">Número</label>
+    <input type="number" id="ej6_c1">
+    
+    <button onclick="func_ej6()">Resultado</button>
+    
+    <label for="ej6_resultado">Resultado</label>
+    <input type="text" id="ej6_resultado">
+
+
+    <!-- ej -->
+    <h1>Ejercicio 7</h1>
+    <label for="ej7_c1">Número</label>
+    <input type="number" id="ej7_c1">
+    
+    <label for="ej7_c2">Número</label>
+    <input type="number" id="ej7_c2">
+
+    <button onclick="func_ej7()">Resultado</button>
+
+    <label for="ej7_resultado">Resultado</label>
+    <input type="text" id="ej7_resultado">
+
+    <!-- ej -->
+    <h1>Ejercicio 8</h1>
+    <label for="ej8_c1">Número</label>
+    <input type="number" id="ej8_c1">
+
+    <button onclick = "func_ej8()" >Resultado</button>
+
+    <label for="ej8_resultado">Resultado</label>
+    <input type="text" id="ej8_resultado">
+
+
+    <!-- ej -->
+    <h1>Ejercicio 9</h1>
+    <label for="ej9_c1">Nombre</label>
+    <input type="text" id="ej9_c1">
+
+    <label for="ej9_c2">Apellido</label>
+    <input type="text" id="ej9_c2">
+
+    <label for="ej9_c3">Edad</label>
+    <input type="number" id="ej9_c3">
+
+    <label for="ej9_c4">Ciudad</label>
+    <input type="text" id="ej9_c4">
+
+    <button onclick="func_ej9()">Armar la frase</button>
+
+    <label for="ej9_resultado">Resultado</label>
+    <input type="text" id="ej9_resultado">
+
+    <!--ej-->
+    <h1>Ejercicio 10</h1>
+    <label for="ej10_c1">Primer Número</label>
+    <input type="number" id="ej10_c1">
+    <br>
+        <label for="ej10_c2">Segundo Número</label>
+        <input type="num" id="ej10_c2">
+        <br>
+
+        <button onclick="func_ej10()">Comparar</button>
+        <label for="ej10_resultado">Resultado</label>
+        <input type="text" id="ej10_resultado">
 
 </body>
 </html>
+

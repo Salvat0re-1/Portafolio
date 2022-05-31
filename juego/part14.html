@@ -1,10 +1,10 @@
-//item nuevo (gema)
+//Score cambiado
 
 <!doctype html> 
 <html lang="en"> 
 <head> 
     <meta charset="UTF-8" />
-    <title>Making your first Phaser 3 Game - Part 13</title>
+    <title>Making your first Phaser 3 Game - Part 14</title>
     <script src="//cdn.jsdelivr.net/npm/phaser@3.11.0/dist/phaser.js"></script>
     <style type="text/css">
         body {
@@ -27,10 +27,10 @@ var config = {
             debug: false
         }
     },
-    scene: {
+    scene:{
         preload: preload,
         create: create,
-        update: update
+        update: update,
     }
 };
 
@@ -108,8 +108,8 @@ function create ()
     //  Some stars to collect, 12 in total, evenly spaced 70 pixels apart along the x axis
     stars = this.physics.add.group({
         key: 'star',
-        repeat: 6,
-        setXY: { x: 10, y: 0, stepX: 60 }
+        repeat: 5,
+        setXY: { x: 10, y: 0, stepX: 150 }
     });
 
     stars.children.iterate(function (child) {
@@ -121,8 +121,8 @@ function create ()
 
     gems = this.physics.add.group({
         key: 'gem',
-        repeat: 5,
-        setXY: { x: 450, y: 0, stepX: 65 }
+        repeat: 4,
+        setXY: { x: 80, y: 0, stepX: 150 }
     });
 
     gems.children.iterate(function (child) {
@@ -135,7 +135,7 @@ function create ()
     bombs = this.physics.add.group();
 
     //  The score
-    scoreText = this.add.text(16, 16, 'Score: 0', { fontSize: '32px', fill: '#000' });
+    scoreText = this.add.text(580, 16, 'Score: 0', { fontSize: '48px Arial', fill: 'red' });
 
     //  Collide the player and the stars with the platforms
     this.physics.add.collider(player, platforms);
@@ -153,9 +153,10 @@ function create ()
 
 function update ()
 {
-    if (gameOver == true)
+    if (gameOver)
     {
-        this.create.start();
+        return;
+        
     }
 
     if (cursors.left.isDown)

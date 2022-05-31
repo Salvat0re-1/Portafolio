@@ -1,0 +1,104 @@
+{
+	"textures": [
+		{
+			"image": "atlas.png",
+			"format": "RGBA8888",
+			"size": {
+				"w": 804,
+				"h": 672
+			},
+			"scale": 1,
+			"frames": [
+				{
+					"filename": "sky.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 802,
+						"h": 602
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 802,
+						"h": 602
+					},
+					"frame": {
+						"x": 1,
+						"y": 1,
+						"w": 802,
+						"h": 602
+					}
+				},
+				{
+					"filename": "newPlataform.jpg",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 316,
+						"h": 60
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 316,
+						"h": 60
+					},
+					"frame": {
+						"x": 1,
+						"y": 605,
+						"w": 316,
+						"h": 60
+					}
+				},
+				{
+					"filename": "platform 2.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 400,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 400,
+						"h": 32
+					},
+					"frame": {
+						"x": 319,
+						"y": 605,
+						"w": 400,
+						"h": 32
+					}
+				},
+				{
+					"filename": "platform.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 400,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 400,
+						"h": 32
+					},
+					"frame": {
+						"x": 319,
+						"y": 639,
+						"w": 400,
+						"h": 32
+					}
+				}
+			]
+		}
+	],
+	"meta": {
+		"app": "https://www.codeandweb.com/texturepacker",
+		"version": "3.0",
+		"smartupdate": "$TexturePacker:SmartUpdate:0cc29c5b22e693ecb5ac3e0896e6d7a4:2e2ef99d1dfb1f56066c3be95ce30150:cbce6b53f0f49e0bf15173c25c41f876$"
+	}
+}

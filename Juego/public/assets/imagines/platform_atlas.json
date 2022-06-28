@@ -1,0 +1,45 @@
+{
+	"textures": [
+		{
+			"image": "platform_atlas.png",
+			"format": "RGBA8888",
+			"size": {
+				"w": 815,
+				"h": 103
+			},
+			"scale": 1,
+			"frames": [
+				{
+					"filename": "platform.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 813,
+						"h": 101
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 813,
+						"h": 101
+					},
+					"frame": {
+						"x": 1,
+						"y": 1,
+						"w": 813,
+						"h": 101
+					},
+					"anchor": {
+						"x": 0.4920049200492005,
+						"y": 1.3465346534653466
+					}
+				}
+			]
+		}
+	],
+	"meta": {
+		"app": "https://www.codeandweb.com/texturepacker",
+		"version": "3.0",
+		"smartupdate": "$TexturePacker:SmartUpdate:285b077d2eefa041597e8653901b50f2:ba9eecd6ffb9dec61910d8a5119ce849:e0b2e34388d1fe0258fcee2f0a850454$"
+	}
+}

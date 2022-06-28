@@ -1,0 +1,41 @@
+{
+	"textures": [
+		{
+			"image": "dudeatlas.png",
+			"format": "RGBA8888",
+			"size": {
+				"w": 286,
+				"h": 45
+			},
+			"scale": 1,
+			"frames": [
+				{
+					"filename": "dude.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 288,
+						"h": 48
+					},
+					"spriteSourceSize": {
+						"x": 2,
+						"y": 5,
+						"w": 284,
+						"h": 43
+					},
+					"frame": {
+						"x": 1,
+						"y": 1,
+						"w": 284,
+						"h": 43
+					}
+				}
+			]
+		}
+	],
+	"meta": {
+		"app": "https://www.codeandweb.com/texturepacker",
+		"version": "3.0",
+		"smartupdate": "$TexturePacker:SmartUpdate:97669eb0687ce81a6b686c598c0fc45b:5bb7ef632e267431c84d2cbf7d5f9f81:18fd1d30f8ee8b36835429f4d9ae9dca$"
+	}
+}

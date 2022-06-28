@@ -7,20 +7,20 @@ export class Preloads extends Phaser.Scene {
     }
   
     preload() {
-      this.load.image("sad_cow", "../juego/assets/sad_cow.png");
-      this.load.image("phaser_logo", "../juego/assets/phaser_logo.png");
+      this.load.image("sad_cow", "../first game/assets/sad_cow.png");
+      this.load.image("phaser_logo", "../first game/assets/phaser_logo.png");
       this.load.image(
         "mainmenu_bg",
-        "../juego/assets/main_menu_background.png"
+        "../first game/assets/main_menu_background.png"
       );
-      this.load.image("sky", "../juego/assets/sky.png");
-      this.load.image("ground", "../juego/assets/platform.png");
-      this.load.image("orange", "../juego/assets/platform 2.png");
-      this.load.image("star", "../juego/assets/star.png");
-      this.load.image("gem", "../juego/assets/gema.png");
-      this.load.image("bomb", "../juego/assets/bomb.png");
+      this.load.image("sky", "../first game/assets/sky.png");
+      this.load.image("ground", "../first game/assets/platform.png");
+      this.load.image("orange", "../first game/assets/platform 2.png");
+      this.load.image("star", "../first game/assets/star.png");
+      this.load.image("gem", "../first game/assets/gema.png");
+      this.load.image("bomb", "../first game/assets/bomb.png");
   
-      this.load.spritesheet("dude", "../juego/assets/dude.png", {
+      this.load.spritesheet("dude", "../first game/assets/dude.png", {
         frameWidth: 32,
         frameHeight: 48,
       });

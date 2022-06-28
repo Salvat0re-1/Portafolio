@@ -109,12 +109,12 @@ create() {
     bombs = this.physics.add.group();
 
     //  The score
-    scoreText = this.add.text(16, 16, 'Score: 0', { stroke: 'white', strokeThickness: 5, fontSize: '48px Arial', fill: 'black' });
+    scoreText = this.add.text(16, 16, 'Score: 0', { stroke: 'red', strokeThickness: 5, fontSize: '48px Arial', fill: 'yellow' });
 
     scoreTimeText = this.add.text(600, 16, "Time: " + scoreTime, {
         fontSize: "48px Arial",
-        fill: "white",
-        stroke: 'black',
+        fill: "yellow",
+        stroke: 'red',
         strokeThickness: 5,
     });
 

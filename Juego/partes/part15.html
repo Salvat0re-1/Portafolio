@@ -141,7 +141,7 @@ function create ()
     bombs = this.physics.add.group();
 
     //  The score
-    scoreText = this.add.text(580, 16, 'Score: 0', { stroke: 'white', strokeThickness: 5, font: '48px Arial', fill: 'black' });
+    scoreText = this.add.text(580, 16, 'Score: 0', { stroke: 'red', strokeThickness: 5, font: '48px Arial', fill: 'yellow' });
 
     //  Collide the player and the stars with the platforms
     this.physics.add.collider(player, platforms);

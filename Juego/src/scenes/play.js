@@ -1,275 +1,266 @@
-// Declaracion de variables para esta escena
 var player;
 var stars;
 var bombs;
+var gems;
+var platforms;
 var cursors;
 var score;
 var gameOver;
+var keyR;
 var scoreText;
-var points;
 var scoreTime;
 var scoreTimeText;
-var timedEvent;
-
+var timedEvent
 
 // Clase Play, donde se crean todos los sprites, el escenario del juego y se inicializa y actualiza toda la logica del juego.
 export class Play extends Phaser.Scene {
-  constructor() {
-    // Se asigna una key para despues poder llamar a la escena
-    super("Play");
-  }
+    constructor() {
+      // Se asigna una key para despues poder llamar a la escena
+      super("Play");
+    }
 
-  init(data) {
+init(data) {
     // recupera el valor SCORE enviado como dato al inicio de la escena
     score = data.score;
     scoreTime = data.scoreTime;
+}
 
-    console.log(score);
-
-  }
-
-  preload() {
-    this.load.tilemapTiledJSON("map", "public/assets/tilemaps/map.json");
-    this.load.image("tilesBelow", "public/assets/imagines/sky_atlas.png");
-    this.load.image("tilesPlatform", "public/assets/imagines/platform_atlas.png");
-  }
-
-  onSecond() {
+onSecond() {
     if (! gameOver)
-    {
+    {       
         scoreTime = scoreTime - 1; // One second
         scoreTimeText.setText('Time: ' + scoreTime);
         if (scoreTime == 0) {
             timedEvent.paused = true;
             this.scene.start(
-              "Retry",
-              { score: score } // se pasa el puntaje como dato a la escena RETRY
+                "Retry",
+                { score: score } // se pasa el puntaje como dato a la escena RETRY
             );
-        }
+        }            
     }
-  }
+}
 
+create() {
 
-  create() {
+    
+    gameOver=false
 
     timedEvent = this.time.addEvent({ 
-      delay: 1000, 
-      callback: this.onSecond, 
-      callbackScope: this, 
-      loop: true 
+        delay: 1000, 
+        callback: this.onSecond, 
+        callbackScope: this, 
+        loop: true 
     });
 
-    const map = this.make.tilemap({ key: "map" });
+    //  A simple background for our game
+    this.add.image(400, 300, 'sky');
 
-    // Parameters are the name you gave the tileset in Tiled and then the key of the tileset image in
-    // Phaser's cache (i.e. the name you used in preload)
-    const tilesetBelow = map.addTilesetImage("sky_atlas", "tilesBelow");
-    const tilesetPlatform = map.addTilesetImage(
-      "platform_atlas",
-      "tilesPlatform"
-    );
+    //  The platforms group contains the ground and the 2 ledges we can jump on
+    platforms = this.physics.add.staticGroup();
 
-    // Parameters: layer name (or index) from Tiled, tileset, x, y
-    const belowLayer = map.createLayer("Fondo", tilesetBelow, 0, 0);
-    const worldLayer = map.createLayer("Plataformas", tilesetPlatform, 0, 0);
-    const objectsLayer = map.getObjectLayer("Objetos");
+    //  Here we create the ground.
+    //  Scale it to fit the width of the game (the original sprite is 400x32 in size)
+    platforms.create(400, 568, 'ground').setScale(2).refreshBody();
 
-    worldLayer.setCollisionByProperty({ collides: true });
+    //  Now let's create some ledges
+    platforms.create(600, 400, 'orange');
+    platforms.create(50, 250, 'orange');
+    platforms.create(750, 220, 'ground');
 
-    // tiles marked as colliding
-    /*
-    const debugGraphics = this.add.graphics().setAlpha(0.75);
-    worldLayer.renderDebug(debugGraphics, {
-      tileColor: null, // Color of non-colliding tiles
-      collidingTileColor: new Phaser.Display.Color(243, 134, 48, 255), // Color of colliding tiles
-      faceColor: new Phaser.Display.Color(40, 39, 37, 255), // Color of colliding face edges
-    });
-    */
-
-    // Find in the Object Layer, the name "dude" and get position
-    const spawnPoint = map.findObject("Objetos", (obj) => obj.name === "dude");
     // The player and its settings
-    player = this.physics.add.sprite(spawnPoint.x, spawnPoint.y, "dude");
+    player = this.physics.add.sprite(100, 450, 'dude');
 
     //  Player physics properties. Give the little guy a slight bounce.
     player.setBounce(0.2);
     player.setCollideWorldBounds(true);
 
+
     //  Input Events
-    if ((cursors = !undefined)) {
-      cursors = this.input.keyboard.createCursorKeys();
-    }
+    cursors = this.input.keyboard.createCursorKeys();
+    keyR= this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.R);
 
-    // Create empty group of starts
-    stars = this.physics.add.group();
-    points = this.physics.add.group();
+    //  Some stars to collect, 12 in total, evenly spaced 70 pixels apart along the x axis
+    stars = this.physics.add.group({
+        key: 'star',
+        repeat: 5,
+        setXY: { x: 10, y: 0, stepX: 150 }
+    });
 
-    // find object layer
-    // if type is "stars", add to stars group
-    objectsLayer.objects.forEach((objData) => {
-      //console.log(objData.name, objData.type, objData.x, objData.y);
+    stars.children.iterate(function (child) {
 
-      const { x = 0, y = 0, name, type } = objData;
-      switch (name) {
-        case "star": {
-          // add star to scene
-          // console.log("estrella agregada: ", x, y);
-          var star = stars.create(x, y, "star");
-          star.setBounceY(Phaser.Math.FloatBetween(0.4, 0.8));
-          break;
-        }
-        case "point": {
-          // add star to scene
-          // console.log("estrella agregada: ", x, y);
-          var point = points.create(x, y, "point");
-          point.setBounceY(Phaser.Math.FloatBetween(0.3, 0.5));
-          break;
-        }
-      }
+        //  Give each star a slightly different bounce
+        child.setBounceY(Phaser.Math.FloatBetween(0.4, 0.8));
 
     });
 
+    gems = this.physics.add.group({
+        key: 'gem',
+        repeat: 4,
+        setXY: { x: 80, y: 0, stepX: 150 }
+    });
 
+    gems.children.iterate(function (child) {
 
-    // Create empty group of bombs
+        //  Give each gem a slightly different bounce
+        child.setBounceY(Phaser.Math.FloatBetween(0.2, 0.5));
+
+    });
+
     bombs = this.physics.add.group();
 
     //  The score
-    scoreText = this.add.text(30, 6, "Score: " + score, {
-      fontSize: "32px",
-      fill: "#FFFFFF",
+    scoreText = this.add.text(16, 16, 'Score: 0', { stroke: 'white', strokeThickness: 5, fontSize: '48px Arial', fill: 'black' });
+
+    scoreTimeText = this.add.text(600, 16, "Time: " + scoreTime, {
+        fontSize: "48px Arial",
+        fill: "white",
+        stroke: 'black',
+        strokeThickness: 5,
     });
 
-    scoreTimeText = this.add.text(630, 6, "Time: " + scoreTime,{
-      fontSize: "32px",
-      fill: "#FFFFFF",
-    });
-
-
-    
-
-
-    // Collide the player and the stars with the platforms
-    // REPLACE Add collision with worldLayer
-    this.physics.add.collider(player, worldLayer);
-    this.physics.add.collider(stars, worldLayer);
-    this.physics.add.collider(points, worldLayer);
-    this.physics.add.collider(bombs, worldLayer);
+    //  Collide the player and the stars with the platforms
+    this.physics.add.collider(player, platforms);
+    this.physics.add.collider(stars, platforms);
+    this.physics.add.collider(bombs, platforms);
+    this.physics.add.collider(gems, platforms);
 
     //  Checks to see if the player overlaps with any of the stars, if he does call the collectStar function
     this.physics.add.overlap(player, stars, this.collectStar, null, this);
-    this.physics.add.overlap(player, points, this.collectPoint, null, this);
+    this.physics.add.overlap(player, gems, this.collectGem, null, this);
     this.physics.add.collider(player, bombs, this.hitBomb, null, this);
 
-    gameOver = false;
-    
-  }
+}
 
-  update() {
-    if (gameOver) {
-      return;
+      
+update ()
+{
+    console.log(keyR.isDown)
+
+    if (gameOver)
+    {
+        if (keyR.isDown)
+        {
+            this.scene.start();
+        }
     }
 
-    if (cursors.left.isDown) {
-      player.setVelocityX(-160);
+    if (keyR.isDown)
+        {
+            this.scene.start();
+        }
 
-      player.anims.play("left", true);
-    } else if (cursors.right.isDown) {
-      player.setVelocityX(160);
 
-      player.anims.play("right", true);
-    } else {
-      player.setVelocityX(0);
+    if (cursors.left.isDown)
+    {
+        player.setVelocityX(-160);
 
-      player.anims.play("turn");
+        player.anims.play('left', true);
+    }
+    else if (cursors.right.isDown)
+    {
+        player.setVelocityX(160);
+
+        player.anims.play('right', true);
+    }
+    else
+    {
+        player.setVelocityX(0);
+
+        player.anims.play('turn');
     }
 
-    // REPLACE player.body.touching.down
-    if (cursors.up.isDown && player.body.blocked.down) {
-      player.setVelocityY(-330);
+    if (cursors.up.isDown && player.body.touching.down)
+    {
+        player.setVelocityY(-330);
     }
-  }
+}
 
-  collectStar(player, star) {
+collectStar (player, star) 
+{
     star.disableBody(true, true);
 
     //  Add and update the score
     score += 10;
-    scoreText.setText("Score: " + score);
+    scoreText.setText('Score: ' + score);
 
-    if (stars.countActive(true) === 0 && points.countActive(true) === 0) {
-      //  A new batch of stars to collect
-      stars.children.iterate(function (child) {
-        child.enableBody(true, child.x, child.y + 10, true, true);
-      });
+    if (stars.countActive(true) === 0 && gems.countActive(true) === 0)
+    {
+        //  A new batch of stars to collect
+        stars.children.iterate(function (child) {
 
-      var x =
-        player.x < 400
-          ? Phaser.Math.Between(400, 800)
-          : Phaser.Math.Between(0, 400);
+            child.enableBody(true, child.x, 0, true, true);
 
-      var bomb = bombs.create(x, 16, "bomb");
-      bomb.setBounce(1);
-      bomb.setCollideWorldBounds(true);
-      bomb.setVelocity(Phaser.Math.Between(-200, 200), 20);
-      this.scene.start("Play2", 
-      {
-        score : score,
-        scoreTime : scoreTime
-      }
-      );
+        });
+
+        gems.children.iterate(function (child) {
+
+            child.enableBody(true, child.x, 0, true, true);
+
+        });
+
+        var x = (player.x < 400) ? Phaser.Math.Between(400, 800) : Phaser.Math.Between(0, 400);
+
+        var bomb = bombs.create(x, 16, 'bomb');
+        bomb.setBounce(1);
+        bomb.setCollideWorldBounds(true);
+        bomb.setVelocity(Phaser.Math.Between(-200, 200), 20);
+        bomb.allowGravity = false;
+
     }
-  }
-  
-  collectPoint(player, point) {
-    point.disableBody(true, true);
+}
 
-    //  Add and update the score
+collectGem (player, gem) 
+{
+    gem.disableBody(true, true);
+
+   
     score += 15;
-    scoreText.setText("Score: " + score);
+    scoreText.setText('Score: ' + score);
 
-    if (points.countActive(true) === 0 && stars.countActive(true) === 0) {
-      //  A new batch of stars to collect
-      points.children.iterate(function (child) {
-        child.enableBody(true, child.x, child.y + 10, true, true);
-      });
+    if (stars.countActive(true) === 0 && gems.countActive(true) === 0)
+    {
+        //  A new batch of stars to collect
+        stars.children.iterate(function (child) {
 
-      var x =
-        player.x < 400
-          ? Phaser.Math.Between(400, 800)
-          : Phaser.Math.Between(0, 400);
+            child.enableBody(true, child.x, 0, true, true);
 
-      var bomb = bombs.create(x, 16, "bomb");
-      bomb.setBounce(1);
-      bomb.setCollideWorldBounds(true);
-      bomb.setVelocity(Phaser.Math.Between(-200, 200), 20);
+        });
 
-      this.scene.start("Play2", 
-      {
-        score : score,
-        scoreTime : scoreTime
-      });
-      
+        gems.children.iterate(function (child) {
+
+            child.enableBody(true, child.x, 0, true, true);
+
+        });
+
+        var x = (player.x < 400) ? Phaser.Math.Between(400, 800) : Phaser.Math.Between(0, 400);
+
+        var bomb = bombs.create(x, 16, 'bomb');
+        bomb.setBounce(1);
+        bomb.setCollideWorldBounds(true);
+        bomb.setVelocity(Phaser.Math.Between(-200, 200), 20);
+        bomb.allowGravity = false;
+
     }
+}
 
-  }
-
-  hitBomb(player, bomb) {
+hitBomb (player, bomb) 
+{
     this.physics.pause();
 
     player.setTint(0xff0000);
 
-    player.anims.play("turn");
+    player.anims.play('turn');
 
     gameOver = true;
 
     // Función timeout usada para llamar la instrucción que tiene adentro despues de X milisegundos
     setTimeout(() => {
-      // Instrucción que sera llamada despues del segundo
-      this.scene.start(
-        "Retry",
-        { score: score } // se pasa el puntaje como dato a la escena RETRY
-      );
-    }, 1000); // Ese número es la cantidad de milisegundos
-  }
+        // Instrucción que sera llamada despues del segundo
+        this.scene.start(
+            "Retry",
+            { score: score } // se pasa el puntaje como dato a la escena RETRY
+        );
+        }, 1000); // Ese número es la cantidad de milisegundos }
+
+    }
 }

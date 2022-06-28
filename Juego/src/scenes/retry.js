@@ -1,4 +1,4 @@
-import Button from "../JS/button.js";
+import Button from "../js/button.js";
 
 var score;
 
